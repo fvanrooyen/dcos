@@ -1,0 +1,31 @@
+#cloud-config
+
+hostname: dcosa3.or1
+coreos:
+  units:
+    - name: systemd-networkd.service
+      command: stop
+    - name: 00-eno1.network
+      runtime: true
+      content: |
+        [Match]
+        Name=eno*
+        [Network]
+        DNS=10.55.198.231
+        Address=10.55.199.48/24
+        Gateway=10.55.199.254
+    - name: down-interfaces.service
+      command: start
+      content: |
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/ip link set eno* down
+        ExecStart=/usr/bin/ip addr flush dev eno*
+    - name: systemd-networkd.service
+      command: restart
+
+ssh-authorized-keys:
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/Ne4GxXY/B6q+ZTGPIr7MnUq8uRjUDEQY6aS28Ii+DFp1P3ef0QJMs++euTOcrS2drpVstN1ikRlfwY2Ap+/kzb1xZb9m0A32LBZV0ZOLF9dAxx5K1DOZzVT6zMLjH906WRw/iwDjLd5C52S70dahyR33/rkbMhvipsF96tWFWxJUfwGz0fkXtJgv+iWumeZrt/q5YAPashBOB233bdT2CnUh0Gr+/ymu4R8HB4lf2fRGoC2Hfs9hfW/TZT8SfMSCpL24Nzw5ochKLEpLZ+xDYXOXtFEMiIZI3dAMYoaWCCjmjobdP/P2PlPF2tXaCTdxotMnZXRp1EUV+GITNTBt root@dcosb1.or1.adobe.net
+
+
+ 

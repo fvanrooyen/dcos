@@ -1,0 +1,19 @@
+bootstrap_url: file:///opt/dcos_install_tmp
+cluster_name: dcos
+exhibitor_storage_backend: static
+ip_detect_filename: /genconf/ip-detect
+master_list:
+- 10.55.199.43
+- 10.55.199.44
+- 10.55.199.45
+agent_list:
+- 10.55.199.46
+- 10.55.199.47
+- 10.55.199.48
+resolvers:
+- 10.55.198.231
+- 10.55.198.232
+ssh_port: 22
+ssh_user: core
+
+
