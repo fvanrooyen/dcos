@@ -1,2 +1,2 @@
 # dcos
-DCOS Deployment
+DCOS Example scripts
